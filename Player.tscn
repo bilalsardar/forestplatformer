@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://sprites/king/king00_idle.png" type="Texture" id=1]
+[ext_resource path="res://sprites/king/king10.png" type="Texture" id=2]
+[ext_resource path="res://sprites/king/king02.png" type="Texture" id=3]
+[ext_resource path="res://sprites/king/king03.png" type="Texture" id=4]
+[ext_resource path="res://sprites/king/king04.png" type="Texture" id=5]
+[ext_resource path="res://sprites/king/king08.png" type="Texture" id=6]
+[ext_resource path="res://sprites/king/king07.png" type="Texture" id=7]
+[ext_resource path="res://sprites/king/king12.png" type="Texture" id=8]
+[ext_resource path="res://sprites/king/king14.png" type="Texture" id=9]
+[ext_resource path="res://sprites/king/king16.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "idle",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "attack",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "jump",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": false,
+"name": "fall",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 7.17246
+height = 9.19077
+
+[node name="Player" type="KinematicBody2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.0994415, 0 )
+frames = SubResource( 1 )
+animation = "attack"
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0.407814, 0.844712 )
+shape = SubResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+show_behind_parent = true
+position = Vector2( 17.995, -0.128653 )
