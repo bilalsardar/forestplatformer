@@ -1,6 +1,6 @@
 extends Node2D
 
-const SPEED = 100
+const SPEED = 150
 var velocity = Vector2()
 var direction = 1 # default right
 
@@ -28,6 +28,3 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_FireBall_body_entered(body):
 	queue_free()
 
-
-func _on_AnimatedSprite_animation_finished():
-	pass # Replace with function body.

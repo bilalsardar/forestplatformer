@@ -19,42 +19,52 @@ func _physics_process(delta):
 		
 
 	if Input.is_action_pressed("ui_right") :
-	
-		velocity.x = SPEED
-		$AnimatedSprite.play("run")
-		$AnimatedSprite.flip_h = false
-		
-		# if position 2d is on the left side then switch it to opposite side.
-		if sign($Position2D.position.x) == -1:
-			$Position2D.position.x *= -1
+		if is_attacking == false || is_on_floor() == false:
+			velocity.x = SPEED
+			if is_attacking == false:
+				$AnimatedSprite.play("run")
+				$AnimatedSprite.flip_h = false
+				
+				# if position 2d is on the left side then switch it to opposite side.
+				if sign($Position2D.position.x) == -1:
+					$Position2D.position.x *= -1
 	
 	elif Input.is_action_pressed("ui_left"):
-		velocity.x = -SPEED
-		$AnimatedSprite.play("run")
-		$AnimatedSprite.flip_h = true
-		
-		# if position 2d is on right side then switch to opposite side
-		if sign($Position2D.position.x) == 1:
-			$Position2D.position.x *= -1
+		if is_attacking == false || is_on_floor() == false:
+			
+			velocity.x = -SPEED
+			if is_attacking == false:
+				$AnimatedSprite.play("run")
+				$AnimatedSprite.flip_h = true
+					
+				# if position 2d is on right side then switch to opposite side
+				if sign($Position2D.position.x) == 1:
+					$Position2D.position.x *= -1
 		
 		
 	else:
 		velocity.x = 0
-		if on_ground == true:
+		if on_ground == true && is_attacking == false:
 			$AnimatedSprite.play("idle")
 		
 	if Input.is_action_pressed("ui_up"):
-		if on_ground == true:
-			velocity.y = JUMP_POWER
+		if is_attacking == false:
+			if on_ground == true:
+				velocity.y = JUMP_POWER
+				on_ground = false
 			
 			
 	
 	
 	
 	# key to shoot fireball
-	if Input.is_action_just_pressed("ui_focus_next"):
-		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
+	if Input.is_action_just_pressed("ui_focus_next") && is_attacking == false:
+		is_attacking = true
 		$AnimatedSprite.play("attack")
+		
+		velocity.x = 0
+		
+		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
 		if sign($Position2D.position.x) == 1:
 			fireball.set_fireball_direction(1)
 		else:
@@ -64,18 +74,20 @@ func _physics_process(delta):
 		# add position2d to player
 		fireball.position = $Position2D.global_position
 		
+
 	
 	if is_on_floor():
+		if on_ground == false:
+			is_attacking = false
 		on_ground = true
 	else: 
 		on_ground = false
-		
+		if is_attacking == false:
 	
-	if on_ground == false:
-		if velocity.y < 0:
-			$AnimatedSprite.play("jump")
-		else:
-			$AnimatedSprite.play("fall")
+			if velocity.y < 0:
+				$AnimatedSprite.play("jump")
+			else:
+				$AnimatedSprite.play("fall")
 	
 	
 	
@@ -87,3 +99,6 @@ func _physics_process(delta):
     
 
 
+
+func _on_AnimatedSprite_animation_finished():
+	is_attacking = false
