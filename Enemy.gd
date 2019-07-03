@@ -9,23 +9,34 @@ var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
 
+var is_dead = false
 
 func _ready():
 	pass 
+	
+func dead():
+	is_dead = true
+	velocity = Vector2(0,0)
+	$AnimatedSprite.play("dead")
+	$CollisionShape2D.disabled = true
+	
+	
 
 func _physics_process(delta):
-	velocity.x = SPEED * direction
-	
-	if direction == 1:
-		$AnimatedSprite.flip_h = false
-	else:
-		$AnimatedSprite.flip_h = true
+	if is_dead == false:
+		velocity.x = SPEED * direction
 		
-	$AnimatedSprite.play("walk")
-	
-	velocity.y +=GRAVITY
-	
-	velocity = move_and_slide(velocity,FLOOR)
+		
+		if direction == 1:
+			$AnimatedSprite.flip_h = false
+		else:
+			$AnimatedSprite.flip_h = true
+			
+		$AnimatedSprite.play("walk")
+		
+		velocity.y +=GRAVITY
+		
+		velocity = move_and_slide(velocity,FLOOR)
 	
 	
 	if is_on_wall():
@@ -36,4 +47,9 @@ func _physics_process(delta):
 		direction = direction * -1
 		$RayCast2D.position.x *= -1
 		
+	
+
+func _on_AnimatedSprite_animation_finished():
+	if is_dead == true:
+		queue_free()
 	

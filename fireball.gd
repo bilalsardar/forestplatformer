@@ -26,5 +26,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_FireBall_body_entered(body):
+	if "Enemy" in body.name:
+		body.dead()
 	queue_free()
 
