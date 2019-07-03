@@ -24,7 +24,6 @@ limit_right = 1000000000
 limit_bottom = 180
 limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 4.0
 
 [node name="ground" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )

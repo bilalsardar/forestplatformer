@@ -13,14 +13,24 @@ var velocity = Vector2()
 
 var on_ground = false
 var is_attacking = false
+var camera_offset = 50
+var camera_smoothing = 2
+ 
 
 func _physics_process(delta):
+	
 	
 		
 
 	if Input.is_action_pressed("ui_right") :
 		if is_attacking == false || is_on_floor() == false:
+			
 			velocity.x = SPEED
+			
+			if $Camera2D.offset.x <= camera_offset:
+				$Camera2D.offset.x += camera_smoothing
+			
+			
 			if is_attacking == false:
 				$AnimatedSprite.play("run")
 				$AnimatedSprite.flip_h = false
@@ -33,6 +43,10 @@ func _physics_process(delta):
 		if is_attacking == false || is_on_floor() == false:
 			
 			velocity.x = -SPEED
+			
+			if $Camera2D.offset.x >= -camera_offset:
+				$Camera2D.offset.x -= camera_smoothing
+			
 			if is_attacking == false:
 				$AnimatedSprite.play("run")
 				$AnimatedSprite.flip_h = true
