@@ -7,6 +7,7 @@ const FLOOR = Vector2(0,-1)
 
 var velocity = Vector2()
 var direction = 1 #we keeping default to right
+var flip_sprite = false
 
 
 func _ready():
@@ -15,13 +16,24 @@ func _ready():
 func _physics_process(delta):
 	velocity.x = SPEED * direction
 	
+	if direction == 1:
+		$AnimatedSprite.flip_h = false
+	else:
+		$AnimatedSprite.flip_h = true
+		
 	$AnimatedSprite.play("walk")
 	
 	velocity.y +=GRAVITY
 	
 	velocity = move_and_slide(velocity,FLOOR)
 	
+	
 	if is_on_wall():
 		direction = direction * -1
-		$AnimatedSprite.flip_h = true
+		$RayCast2D.position.x *= -1
+	
+	if $RayCast2D.is_colliding() == false:
+		direction = direction * -1
+		$RayCast2D.position.x *= -1
+		
 	
