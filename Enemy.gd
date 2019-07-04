@@ -8,21 +8,36 @@ const FLOOR = Vector2(0,-1)
 var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
+var hp = 100
+
 
 var is_dead = false
 
 func _ready():
 	pass 
 	
-func dead():
-	is_dead = true
-	velocity = Vector2(0,0)
-	$AnimatedSprite.play("dead")
-	$CollisionShape2D.disabled = true
+
+	
+	
+	
+func dead(hitpoints):
+	
+	hp = hp - hitpoints;
+	
+	if hp <= 0 :
+		is_dead = true
+		velocity = Vector2(0,0)
+		$AnimatedSprite.play("dead")
+		$CollisionShape2D.disabled = true
+	
+	
 	
 	
 
 func _physics_process(delta):
+	
+	$TextureProgress.ANCHOR_BEGIN
+	
 	if is_dead == false:
 		velocity.x = SPEED * direction
 		

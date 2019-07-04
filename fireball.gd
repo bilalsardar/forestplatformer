@@ -3,7 +3,7 @@ extends Node2D
 const SPEED = 150
 var velocity = Vector2()
 var direction = 1 # default right
-
+var hitpoints = 50;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +27,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_FireBall_body_entered(body):
 	if "Enemy" in body.name:
-		body.dead()
+		body.dead(hitpoints)
 	queue_free()
 

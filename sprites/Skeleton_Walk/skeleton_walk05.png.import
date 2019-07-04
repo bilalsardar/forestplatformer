@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/skeleton_walk05.png-a8ccae53a5280ac2f926f5419b90ce72.stex"
+path="res://.import/skeleton_walk05.png-ce916ffa51659a57ddfc4818c6bb835f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Skeleton_walk/skeleton_walk05.png"
-dest_files=[ "res://.import/skeleton_walk05.png-a8ccae53a5280ac2f926f5419b90ce72.stex" ]
+source_file="res://sprites/Skeleton_Walk/skeleton_walk05.png"
+dest_files=[ "res://.import/skeleton_walk05.png-ce916ffa51659a57ddfc4818c6bb835f.stex" ]
 
 [params]
 
