@@ -3,7 +3,7 @@ extends Node2D
 const SPEED = 150
 var velocity = Vector2()
 var direction = 1 # default right
-var hitpoints = 50;
+var hitpoints = 20;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,9 +34,21 @@ func _on_FireBall_body_entered(body):
 		body.dead(hitpoints)
 	queue_free()
 	
-func _random_fireball_color():
-	var R = randf()*0.9+0.1
-	#var G = randf()*0.9+0.1
-
-	$AnimatedSprite.modulate = Color(0.8, R, R)
+func _random_fireball_color(shooter):
+	if shooter == "Player":
+		var R = randf()*0.9+0.1
+		#var G = randf()*0.9+0.1
+	
+		$AnimatedSprite.modulate = Color(0.8, R, R)
+		
+	elif shooter == "Boss":
+		#75,0,130
+		var R = randf()*0.9+0.5
+		var G = randf()*0.9+0.1
+		
+		$AnimatedSprite.modulate = Color(R,0,130)
+		
+		
+	elif shooter == "Enemy":
+		pass
 	

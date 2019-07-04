@@ -37,4 +37,4 @@ rotation = 1.5708
 position = Vector2( -4.9738e-014, 18.6667 )
 rotation = 1.5708
 enabled = true
-cast_to = Vector2( 0, 100 )
+cast_to = Vector2( 0, 90 )

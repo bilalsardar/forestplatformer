@@ -9,7 +9,9 @@ var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
 var is_attacking = false
-var hp = 150
+var hp = 300
+
+
 
 # loading fireball scene
 const FIREBALL = preload("res://fireball.tscn")
@@ -65,7 +67,7 @@ func _physics_process(delta):
 		velocity.x = 0
 		
 		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
-		fireball._random_fireball_color()
+		fireball._random_fireball_color("Boss")
 		
 		if sign($Position2D.position.x) == 1:
 			fireball.set_fireball_direction(1)
@@ -75,6 +77,12 @@ func _physics_process(delta):
 		get_parent().add_child(fireball)
 		# add position2d to player
 		fireball.position = $Position2D.global_position
+		
+		
+		
+		
+			
+		
 		
 		
 		

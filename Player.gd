@@ -9,7 +9,7 @@ const FLOOR = Vector2(0, -1) # to tell the up side of the floor, needed for is_o
 const FIREBALL = preload("res://fireball.tscn")
 
 var velocity = Vector2()
-var hp = 2000
+var hp = 1000
 
 var on_ground = false
 var is_attacking = false
@@ -90,7 +90,7 @@ func _physics_process(delta):
 		velocity.x = 0
 		
 		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
-		fireball._random_fireball_color()
+		fireball._random_fireball_color("Player")
 		
 		if sign($Position2D.position.x) == 1:
 			fireball.set_fireball_direction(1)
