@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Boss.gd" type="Script" id=1]
+[ext_resource path="res://sprites/boss_orignal.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "idle",
+"speed": 1.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.0783, 26.9545 )
+
+[node name="Boss" type="KinematicBody2D"]
+scale = Vector2( 1.5, 1.5 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -5.59081, 0.225657 )
+shape = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( -29.0761, 13.3726 )
+rotation = 1.5708
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( -4.9738e-014, 18.6667 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 100 )

@@ -9,18 +9,29 @@ const FLOOR = Vector2(0, -1) # to tell the up side of the floor, needed for is_o
 const FIREBALL = preload("res://fireball.tscn")
 
 var velocity = Vector2()
-
+var hp = 2000
 
 var on_ground = false
 var is_attacking = false
 var camera_offset = 50
 var camera_smoothing = 2
  
+var is_dead = false
+
+
+func dead(hitpoints):
+	
+	hp = hp - hitpoints;
+	
+	if hp <= 0 :
+		is_dead = true
+		queue_free()
+
+
+
 
 func _physics_process(delta):
-	
-	
-		
+
 
 	if Input.is_action_pressed("ui_right") :
 		if is_attacking == false || is_on_floor() == false:
@@ -79,6 +90,8 @@ func _physics_process(delta):
 		velocity.x = 0
 		
 		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
+		fireball._random_fireball_color()
+		
 		if sign($Position2D.position.x) == 1:
 			fireball.set_fireball_direction(1)
 		else:

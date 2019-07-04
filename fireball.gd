@@ -28,5 +28,15 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_FireBall_body_entered(body):
 	if "Enemy" in body.name:
 		body.dead(hitpoints)
+	elif "Boss" in body.name:
+		body.dead(hitpoints)
+	elif "Player" in body.name:
+		body.dead(hitpoints)
 	queue_free()
+	
+func _random_fireball_color():
+	var R = randf()*0.9+0.1
+	#var G = randf()*0.9+0.1
 
+	$AnimatedSprite.modulate = Color(0.8, R, R)
+	

@@ -30,15 +30,18 @@ func dead(hitpoints):
 		$AnimatedSprite.play("dead")
 		$CollisionShape2D.disabled = true
 	
+		
+	
 	
 	
 	
 
 func _physics_process(delta):
 	
-	$TextureProgress.ANCHOR_BEGIN
+	
 	
 	if is_dead == false:
+		
 		velocity.x = SPEED * direction
 		
 		
