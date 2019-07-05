@@ -48,7 +48,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite.flip_h = false
 		
-		$AnimatedSprite.play("idle") # or walk
+		$AnimatedSprite.play("walk") # or walk
 			
 		
 		
@@ -62,7 +62,7 @@ func _physics_process(delta):
 	if $RayCast2D.is_colliding() == true:
 		
 		
-		#$AnimatedSprite.play("attack")
+		$AnimatedSprite.play("idle")
 		is_attacking = true
 		velocity.x = 0
 		
