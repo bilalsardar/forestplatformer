@@ -23,6 +23,7 @@ animations = [ {
 extents = Vector2( 12.0783, 26.059 )
 
 [node name="Boss" type="KinematicBody2D"]
+editor/display_folded = true
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 

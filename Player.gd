@@ -23,6 +23,7 @@ func dead(hitpoints):
 	
 	hp = hp - hitpoints;
 	
+		
 	if hp <= 0 :
 		is_dead = true
 		queue_free()
@@ -32,7 +33,8 @@ func dead(hitpoints):
 
 func _physics_process(delta):
 
-
+	
+	
 	if Input.is_action_pressed("ui_right") :
 		if is_attacking == false || is_on_floor() == false:
 			
