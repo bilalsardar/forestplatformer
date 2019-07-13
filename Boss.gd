@@ -10,7 +10,7 @@ var direction = 1 #we keeping default to right
 var flip_sprite = false
 var is_attacking = false
 var hp = 300
-
+var fireBallCount=0
 
 
 # loading fireball scene
@@ -44,9 +44,9 @@ func _physics_process(delta):
 		velocity.x = SPEED * direction
 		
 		if direction == 1:
-			$AnimatedSprite.flip_h = true
-		else:
 			$AnimatedSprite.flip_h = false
+		else:
+			$AnimatedSprite.flip_h = true
 		
 		$AnimatedSprite.play("walk") # or walk
 			
@@ -55,7 +55,8 @@ func _physics_process(delta):
 		
 	if is_on_wall():
 		direction = direction * -1
-		
+		$RayCast2D.rotation_degrees *= -1
+		$Position2D.position.x *= -1
 		
 	
 	# boss will attack when inside raycast 
@@ -68,7 +69,8 @@ func _physics_process(delta):
 		
 		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
 		fireball._random_fireball_color("Boss")
-		
+		fireBallCount+=1 # a fireball is created
+		$RichTextLabel.text = str(fireBallCount)
 		if sign($Position2D.position.x) == 1:
 			fireball.set_fireball_direction(1)
 		else:
@@ -77,16 +79,6 @@ func _physics_process(delta):
 		get_parent().add_child(fireball)
 		# add position2d to player
 		fireball.position = $Position2D.global_position
-		
-		
-		
-		
-			
-		
-		
-		
-		
-	
 	velocity.y +=GRAVITY
 	velocity = move_and_slide(velocity,FLOOR)
 	
