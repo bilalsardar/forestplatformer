@@ -16,6 +16,7 @@ scale = Vector2( 0.93775, 1.07847 )
 texture = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+editor/display_folded = true
 position = Vector2( 969.983, 162.246 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -52,10 +53,11 @@ position = Vector2( 366.777, 153.274 )
 position = Vector2( 781.36, 153.274 )
 
 [node name="Boss" parent="." instance=ExtResource( 5 )]
-position = Vector2( 889.204, 133.583 )
+position = Vector2( 1142.7, 124.505 )
 SPEED = 50
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
 scroll_base_scale = Vector2( 0.4, 0.4 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]

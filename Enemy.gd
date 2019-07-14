@@ -14,14 +14,10 @@ var hp = 100
 var is_dead = false
 
 func _ready():
-	pass 
-	
+	self.set_meta("type","Enemy")
+	pass
 
-	
-	
-	
-func dead(hitpoints):
-	
+func damage(hitpoints):
 	hp = hp - hitpoints;
 	
 	if hp <= 0 :
@@ -29,13 +25,7 @@ func dead(hitpoints):
 		velocity = Vector2(0,0)
 		$AnimatedSprite.play("dead")
 		$CollisionShape2D.disabled = true
-	
 		
-	
-	
-	
-	
-
 func _physics_process(delta):
 	
 	

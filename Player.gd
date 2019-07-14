@@ -18,23 +18,17 @@ var camera_smoothing = 2
  
 var is_dead = false
 
+func _ready():
+	self.set_meta("type","Player")
+	pass
 
-func dead(hitpoints):
-	
+func damage(hitpoints):
 	hp = hp - hitpoints;
-	
-		
 	if hp <= 0 :
 		is_dead = true
 		queue_free()
 
-
-
-
 func _physics_process(delta):
-
-	
-	
 	if Input.is_action_pressed("ui_right") :
 		if is_attacking == false || is_on_floor() == false:
 			

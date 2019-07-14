@@ -26,12 +26,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_FireBall_body_entered(body):
-	if "Enemy" in body.name:
-		body.dead(hitpoints)
-	elif "Boss" in body.name:
-		body.dead(hitpoints)
-	elif "Player" in body.name:
-		body.dead(hitpoints)
+	if body.has_method("damage"):
+		body.damage(hitpoints)
 	queue_free()
 	
 func _random_fireball_color(shooter):
