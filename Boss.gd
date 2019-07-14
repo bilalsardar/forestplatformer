@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const GRAVITY = 10
-const SPEED = 10
+export var SPEED = 10
 const FLOOR = Vector2(0,-1)
 
 
@@ -9,9 +9,8 @@ var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
 var is_attacking = false
-var hp = 300
+export var hp = 300
 var fireBallCount=0
-
 
 # loading fireball scene
 const FIREBALL = preload("res://fireball.tscn")
@@ -21,7 +20,13 @@ var is_dead = false
 
 
 func _ready():
-	pass 
+	if direction == 1:
+		#This tyoe of child node addressing is name dependent
+		#AnimatedSprite node must exist of this type
+		$AnimatedSprite.flip_h = false
+	else:
+		$AnimatedSprite.flip_h = true
+	pass
 	
 
 	
@@ -36,33 +41,27 @@ func dead(hitpoints):
 		$CollisionShape2D.disabled = true
 		queue_free()
 	
+func myprint(text):
+	$RichTextLabel.set_text(text)
 	
 func _physics_process(delta):
-	
+	myprint(str($Timer.time_left))
 	if is_dead == false:
-		
-		velocity.x = SPEED * direction
-		
+		velocity.x = SPEED * -direction
+		$AnimatedSprite.play("walk") # or walk
+	#Change direction and if time up is reached
+	if is_on_wall() && $Timer.is_stopped():
+		direction = direction * -1
+		$RayCast2D.rotation_degrees *= -1
+		$Position2D.position.x *= -1
 		if direction == 1:
 			$AnimatedSprite.flip_h = false
 		else:
 			$AnimatedSprite.flip_h = true
-		
-		$AnimatedSprite.play("walk") # or walk
-			
-		
-		
-		
-	if is_on_wall():
-		direction = direction * -1
-		$RayCast2D.rotation_degrees *= -1
-		$Position2D.position.x *= -1
-		
-	
+		$Timer.start()
 	# boss will attack when inside raycast 
 	if $RayCast2D.is_colliding() == true:
-		
-		
+		var Obj = $RayCast2D.get_collider()
 		$AnimatedSprite.play("idle")
 		is_attacking = true
 		velocity.x = 0
@@ -70,7 +69,6 @@ func _physics_process(delta):
 		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
 		fireball._random_fireball_color("Boss")
 		fireBallCount+=1 # a fireball is created
-		$RichTextLabel.text = str(fireBallCount)
 		if sign($Position2D.position.x) == 1:
 			fireball.set_fireball_direction(1)
 		else:

@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const SPEED = 75
 const GRAVITY = 10
-const JUMP_POWER = -250
+const JUMP_POWER = -300
 const FLOOR = Vector2(0, -1) # to tell the up side of the floor, needed for is_on_floor() func
 
 # loading fireball scene
