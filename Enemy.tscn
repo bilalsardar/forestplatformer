@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Skeleton_die/skeleton_walk00.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://sprites/Skeleton_Walk/skeleton_walk10.png" type="Texture" id=26]
 [ext_resource path="res://sprites/Skeleton_Walk/skeleton_walk11.png" type="Texture" id=27]
 [ext_resource path="res://sprites/Skeleton_Walk/skeleton_walk12.png" type="Texture" id=28]
+[ext_resource path="res://UI/HealthBar.gd" type="Script" id=29]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -60,4 +61,12 @@ shape = SubResource( 2 )
 position = Vector2( 1.74477, -0.612563 )
 enabled = true
 cast_to = Vector2( 0, 18 )
+
+[node name="HealthBar" type="ColorRect" parent="."]
+margin_left = -11.6258
+margin_top = -11.4685
+margin_right = 3.3742
+margin_bottom = -9.46847
+script = ExtResource( 29 )
+factor = 5
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

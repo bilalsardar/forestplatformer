@@ -9,7 +9,7 @@ var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
 var is_attacking = false
-export var hp = 300
+export var hp = 180
 var fireBallCount=0
 
 # loading fireball scene
@@ -21,6 +21,8 @@ var is_dead = false
 
 func _ready():
 	self.set_meta("tpye","Boss")
+	$HealthBar.creat_healthBar(hp)
+	#This will creat the req num of health bars, call once
 	if direction == 1:
 		#This tyoe of child node addressing is name dependent
 		#AnimatedSprite node must exist of this type
@@ -31,7 +33,8 @@ func _ready():
 #This function is used to damage the boss
 func damage(hitpoints):
 	#apply damage
-	hp = hp - hitpoints;
+	hp = hp - hitpoints
+	$HealthBar.update_healthBar(hp)#show this change
 	if hp <= 0 :
 		is_dead = true
 		velocity = Vector2(0,0)
