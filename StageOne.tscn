@@ -54,7 +54,7 @@ position = Vector2( 781.36, 153.274 )
 
 [node name="Boss" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1142.7, 124.505 )
-SPEED = 50
+hp = 400
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 editor/display_folded = true

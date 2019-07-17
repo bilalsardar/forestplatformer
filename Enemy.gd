@@ -8,18 +8,19 @@ const FLOOR = Vector2(0,-1)
 var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
-var hp = 100
+export var hp = 100
 
 
 var is_dead = false
 
 func _ready():
 	self.set_meta("type","Enemy")
+	$HealthBar.creat_healthBar(hp)
 	pass
 
 func damage(hitpoints):
 	hp = hp - hitpoints;
-	
+	$HealthBar.update_healthBar(hp)
 	if hp <= 0 :
 		is_dead = true
 		velocity = Vector2(0,0)

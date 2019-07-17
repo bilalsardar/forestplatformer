@@ -73,12 +73,7 @@ func _physics_process(delta):
 			if on_ground == true:
 				velocity.y = JUMP_POWER
 				on_ground = false
-			
-			
-	
-	
-	
-	# key to shoot fireball
+	# key to shoot fireball Tab Key
 	if Input.is_action_just_pressed("ui_focus_next") && is_attacking == false:
 		is_attacking = true
 		$AnimatedSprite.play("attack")
@@ -111,11 +106,6 @@ func _physics_process(delta):
 				$AnimatedSprite.play("jump")
 			else:
 				$AnimatedSprite.play("fall")
-	
-	
-	
-
-	
 	velocity.y += GRAVITY
 	
 	velocity = move_and_slide(velocity, FLOOR)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Boss.gd" type="Script" id=1]
 [ext_resource path="res://sprites/lvl1_boss/boss_walk/boss_orignal1.png" type="Texture" id=2]
 [ext_resource path="res://sprites/lvl1_boss/boss_walk/boss_orignal2.png" type="Texture" id=3]
 [ext_resource path="res://sprites/lvl1_boss/boss_walk/boss_orignal3.png" type="Texture" id=4]
 [ext_resource path="res://sprites/lvl1_boss/boss_walk/boss_orignal4.png" type="Texture" id=5]
+[ext_resource path="res://UI/HealthBar.gd" type="Script" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,6 +28,7 @@ scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 0.314066 )
 frames = SubResource( 1 )
 animation = "walk"
 
@@ -49,10 +51,18 @@ cast_to = Vector2( 0, 90 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_left = -20.0
-margin_top = -39.7484
-margin_right = 24.0
-margin_bottom = -24.7484
+margin_top = -40.0
+margin_right = 13.0
+margin_bottom = -25.0
 text = "boss"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HealthBar" type="ColorRect" parent="."]
+margin_left = -16.0
+margin_top = -25.5604
+margin_right = 14.0
+margin_bottom = -23.5604
+script = ExtResource( 6 )
+factor = 4
