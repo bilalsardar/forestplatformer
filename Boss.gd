@@ -20,13 +20,9 @@ var is_dead = false
 
 
 func _ready():
-<<<<<<< HEAD
-	self.set_meta("type","Boss")
-=======
 	self.set_meta("tpye","Boss")
 	$HealthBar.creat_healthBar(hp)
 	#This will creat the req num of health bars, call once
->>>>>>> e23508785e16e70a685595713692e82453689402
 	if direction == 1:
 		#This tyoe of child node addressing is name dependent
 		#AnimatedSprite node must exist of this type
@@ -48,10 +44,10 @@ func damage(hitpoints):
 	#change color depanding on remaining hp
 	if hp < 100:
 		self.modulate = Color(1,1,1)
-	
+
 func myprint(text):
 	$RichTextLabel.set_text(text)
-	
+
 func _physics_process(delta):
 	myprint(str($Timer.time_left))
 	if is_dead == false:
@@ -67,7 +63,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite.flip_h = true
 		$Timer.start()
-	# boss will attack when inside raycast 
+	# boss will attack when inside raycast
 	if $RayCast2D.is_colliding() == true:
 		#The collider Object reference
 		var colObj = $RayCast2D.get_collider()
@@ -88,7 +84,3 @@ func _physics_process(delta):
 			fireball.position = $Position2D.global_position
 	velocity.y +=GRAVITY
 	velocity = move_and_slide(velocity,FLOOR)
-	
-	
-		
-		
