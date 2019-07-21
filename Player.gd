@@ -20,10 +20,12 @@ var is_dead = false
 
 func _ready():
 	self.set_meta("type","Player")
+	$HealthBar.creat_healthBar(hp)
 	pass
 
 func damage(hitpoints):
 	hp = hp - hitpoints;
+	$HealthBar.update_healthBar(hp)
 	if hp <= 0 :
 		is_dead = true
 		queue_free()

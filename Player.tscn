@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/king/king00_idle.png" type="Texture" id=2]
 [ext_resource path="res://sprites/king/king07.png" type="Texture" id=3]
-[ext_resource path="res://sprites/king/king10.png" type="Texture" id=4]
-[ext_resource path="res://sprites/king/king02.png" type="Texture" id=5]
-[ext_resource path="res://sprites/king/king03.png" type="Texture" id=6]
-[ext_resource path="res://sprites/king/king04.png" type="Texture" id=7]
-[ext_resource path="res://sprites/king/king08.png" type="Texture" id=8]
-[ext_resource path="res://sprites/king/king12.png" type="Texture" id=9]
-[ext_resource path="res://sprites/king/king14.png" type="Texture" id=10]
-[ext_resource path="res://sprites/king/king16.png" type="Texture" id=11]
+[ext_resource path="res://sprites/king/king12.png" type="Texture" id=4]
+[ext_resource path="res://sprites/king/king03.png" type="Texture" id=5]
+[ext_resource path="res://sprites/king/king14.png" type="Texture" id=6]
+[ext_resource path="res://sprites/king/king16.png" type="Texture" id=7]
+[ext_resource path="res://sprites/king/king10.png" type="Texture" id=8]
+[ext_resource path="res://sprites/king/king02.png" type="Texture" id=9]
+[ext_resource path="res://sprites/king/king04.png" type="Texture" id=10]
+[ext_resource path="res://sprites/king/king08.png" type="Texture" id=11]
+[ext_resource path="res://UI/HealthBar.gd" type="Script" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,19 +26,19 @@ animations = [ {
 "speed": 0.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "attack",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": false,
 "name": "jump",
 "speed": 0.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "run",
-"speed": 8.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -62,4 +63,12 @@ shape = SubResource( 2 )
 [node name="Position2D" type="Position2D" parent="."]
 show_behind_parent = true
 position = Vector2( 17.995, -0.128653 )
+
+[node name="HealthBar" type="ColorRect" parent="."]
+margin_left = -9.81148
+margin_top = -13.1042
+margin_right = 10.1885
+margin_bottom = -11.1042
+script = ExtResource( 12 )
+factor = 10
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

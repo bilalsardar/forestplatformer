@@ -8,7 +8,7 @@ const FLOOR = Vector2(0,-1)
 var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
-export var hp = 100
+export var hp = 50
 
 
 var is_dead = false
@@ -24,18 +24,12 @@ func damage(hitpoints):
 	if hp <= 0 :
 		is_dead = true
 		velocity = Vector2(0,0)
-		$AnimatedSprite.play("dead")
 		$CollisionShape2D.disabled = true
+		$AnimatedSprite.play("dead")
 		
 func _physics_process(delta):
-	
-	
-	
 	if is_dead == false:
-		
 		velocity.x = SPEED * direction
-		
-		
 		if direction == 1:
 			$AnimatedSprite.flip_h = false
 		else:
