@@ -20,7 +20,7 @@ var is_dead = false
 
 
 func _ready():
-	self.set_meta("tpye","Boss")
+	self.set_meta("character","Skeleton_Mage")
 	$HealthBar.creat_healthBar(hp)
 	#This will creat the req num of health bars, call once
 	if direction == 1:
@@ -67,7 +67,7 @@ func _physics_process(delta):
 	if $RayCast2D.is_colliding() == true:
 		#The collider Object reference
 		var colObj = $RayCast2D.get_collider()
-		if colObj.has_meta("type"): # colObj.has_method("damage"):
+		if colObj.has_meta("character"): # colObj.has_method("damage"):
 			$AnimatedSprite.play("idle")
 			is_attacking = true
 			velocity.x = 0

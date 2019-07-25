@@ -19,7 +19,7 @@ var camera_smoothing = 2
 var is_dead = false
 
 func _ready():
-	self.set_meta("type","Player")
+	self.set_meta("character","King")
 	$HealthBar.creat_healthBar(hp)
 	pass
 

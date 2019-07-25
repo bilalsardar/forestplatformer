@@ -26,8 +26,9 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_FireBall_body_entered(body):
-	if body.has_method("damage"):
-		body.damage(hitpoints)
+	#if body.has_method("damage"):
+	if body.has_meta("character"):
+		body.damage(hitpoints)#all character will have this function
 	queue_free()
 	
 func _random_fireball_color(shooter):
