@@ -1,14 +1,16 @@
 extends KinematicBody2D
 
 const GRAVITY = 10
-const SPEED = 30
+const SPEED = 50
 const FLOOR = Vector2(0,-1)
 
 
 var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
-export var hp = 50
+var attack_power = 100 #power of damage
+var hit_count = 0 # the number of times damage is done
+export var hp = 400
 
 
 var is_dead = false
@@ -37,6 +39,7 @@ func damage(hitpoints):
 		$AnimatedSprite.play("dead")
 		
 func _physics_process(delta):
+	var body = $Area2D.get_overlapping_bodies()
 	if Input.is_action_just_pressed("ui_select"):
 		_change_state(ATTACK)
 		pass
@@ -45,6 +48,9 @@ func _physics_process(delta):
 			$AnimatedSprite.play("idle")
 			pass
 		WALK:
+			for b in body:
+				if b.has_meta("character"):
+					_change_state(ATTACK)
 			velocity.x = SPEED * direction
 			if direction == 1:
 				$AnimatedSprite.flip_h = false
@@ -59,22 +65,38 @@ func _physics_process(delta):
 			if is_on_wall():
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
-			
+				$Area2D/CollisionShape2D.position.x *= -1 
+				$CollisionShape2D.position.x *= -1
+				
 			if $RayCast2D.is_colliding() == false:
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
+				$Area2D/CollisionShape2D.position.x *= -1
+				$CollisionShape2D.position.x *= -1
 		ATTACK:
 			$AnimatedSprite.play("attack")
+			for b in body:
+				if $AnimatedSprite.frame == 7 and hit_count==0:
+					hit_count+=1 # a hit with this attack
+					if b.has_method("damage"):
+						b.damage(attack_power)
 		DEAD:
 			pass
-
  
 func _on_AnimatedSprite_animation_finished():
+	var body = $Area2D.get_overlapping_bodies()
 	if current_state==ATTACK:
-		_change_state(IDLE)
-		$AnimatedSprite.position = Vector2(0,0)
+		if len(body):
+			for b in body:
+				if b.has_meta("character"):
+					$AnimatedSprite.frame = 0
+					break
+				else:
+					_change_state(WALK)
+		else:
+			_change_state(WALK)
+		hit_count=0 # start with zero
 	elif current_state==IDLE:
 		_change_state(WALK)
 	if is_dead == true:
 		queue_free()
-	

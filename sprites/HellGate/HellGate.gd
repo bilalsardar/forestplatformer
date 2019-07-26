@@ -7,7 +7,7 @@ func _ready():
 	time = Timer.new()
 	#auto load timer will casue issue
 	time.one_shot = true
-	time.start(5)
+	time.start(3)
 	add_child(time)
 	pass # Replace with function body.
 func _physics_process(delta):
