@@ -3,6 +3,7 @@ extends KinematicBody2D
 const SPEED = 75
 const GRAVITY = 10
 const JUMP_POWER = -300
+const ATTACK_POWER = 50
 const FLOOR = Vector2(0, -1) # to tell the up side of the floor, needed for is_on_floor() func
 
 # loading fireball scene
@@ -83,6 +84,7 @@ func _physics_process(delta):
 		velocity.x = 0
 		
 		var fireball = FIREBALL.instance() # creating instance, created one fireball in memory
+		fireball.hitpoints = ATTACK_POWER # the damage
 		fireball._random_fireball_color("Player")
 		
 		if sign($Position2D.position.x) == 1:
