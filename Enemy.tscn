@@ -113,6 +113,7 @@ script = ExtResource( 58 )
 factor = 5
 
 [node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 15.1136, 2.65733 )
 __meta__ = {
 "_edit_group_": true

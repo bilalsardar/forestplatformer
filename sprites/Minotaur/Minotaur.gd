@@ -45,6 +45,7 @@ func _physics_process(delta):
 		pass
 	match current_state:
 		IDLE:
+			velocity.x = 0
 			$AnimatedSprite.play("idle")
 			pass
 		WALK:
@@ -66,9 +67,6 @@ func _physics_process(delta):
 				
 			$AnimatedSprite.play("walk")
 			
-			velocity.y +=GRAVITY
-			
-			velocity = move_and_slide(velocity,FLOOR)
 			if is_on_wall():
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
@@ -83,6 +81,7 @@ func _physics_process(delta):
 				$Area2D_B.position.x *= -1
 				$CollisionShape2D.position.x *= -1
 		ATTACK:
+			velocity.x = 0
 			match attack_type:
 				BASIC:
 					$AnimatedSprite.play("attack_basic")
@@ -101,11 +100,13 @@ func _physics_process(delta):
 				STAB:
 					pass
 		DEAD:
+			velocity.x = 0
 			is_dead = true
 			velocity = Vector2(0,0)
-			$CollisionShape2D.disabled = true
 			$AnimatedSprite.play("dead")
 			pass
+	velocity.y +=GRAVITY
+	velocity = move_and_slide(velocity,FLOOR)
  
 func _on_AnimatedSprite_animation_finished():
 	var body = $Area2D.get_overlapping_bodies()
