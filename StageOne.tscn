@@ -112,3 +112,9 @@ position = Vector2( 688.703, 158.17 )
 
 [node name="Cyclops" parent="." instance=ExtResource( 9 )]
 position = Vector2( 74.5898, 65.324 )
+
+[node name="Cyclops2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 408.532, 143.676 )
+
+[node name="Cyclops3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 156.184, 147.459 )

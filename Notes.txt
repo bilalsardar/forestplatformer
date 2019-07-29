@@ -1,0 +1,2 @@
+Shop: - Posions(Healing, magic(scroll)), Armer,
+Mana System

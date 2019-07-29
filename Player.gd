@@ -96,8 +96,6 @@ func _physics_process(delta):
 		# add position2d to player
 		fireball.position = $Position2D.global_position
 		
-
-	
 	if is_on_floor():
 		if on_ground == false:
 			is_attacking = false

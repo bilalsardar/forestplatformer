@@ -1,45 +1,32 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileSet_2.tres" type="TileSet" id=2]
 [ext_resource path="res://sprites/Cyclops/Cyclops.tscn" type="PackedScene" id=3]
-[ext_resource path="res://sprites/Cyclops/rock.gd" type="Script" id=4]
-[ext_resource path="res://sprites/Cyclops/rock.png" type="Texture" id=5]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 144.956
+[ext_resource path="res://sprites/Cyclops/rockThrowTest.gd" type="Script" id=4]
 
 [node name="Cyclops_test" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
-position = Vector2( 192.254, 58.5863 )
+position = Vector2( 230, 147.767 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 327687, 34, 0, 327688, 34, 0, 327689, 34, 0, 327690, 34, 0, 327691, 34, 0, 327692, 34, 0, 393217, 8, 0, 458753, 8, 0, 458770, 10, 0, 524289, 8, 0, 524306, 10, 0, 589825, 8, 0, 589842, 10, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0 )
-
-[node name="Cyclops" parent="." instance=ExtResource( 3 )]
-position = Vector2( 137.649, 119.448 )
+tile_data = PoolIntArray( 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 196627, 0, 0, 196628, 0, 0, 262144, 0, 0, 262164, 0, 0, 327680, 0, 0, 327700, 0, 0, 393216, 0, 0, 393236, 0, 0, 458752, 0, 0, 458772, 0, 0, 524288, 0, 0, 524308, 0, 0, 589824, 0, 0, 589844, 0, 0, 655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0 )
 
 [node name="Cyclops2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 127.839, 57.2966 )
+position = Vector2( 50, 140 )
 
-[node name="rock" type="KinematicBody2D" parent="."]
-position = Vector2( 50.222, 34.1627 )
-scale = Vector2( 0.03, 0.03 )
+[node name="rockThrowTest" type="Position2D" parent="."]
+position = Vector2( 167.654, 115.3 )
 script = ExtResource( 4 )
 __meta__ = {
-"_edit_group_": true
+"_edit_lock_": true
 }
-
-[node name="Sprite" type="Sprite" parent="rock"]
-scale = Vector2( 1, 1 )
-texture = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="rock"]
-shape = SubResource( 1 )

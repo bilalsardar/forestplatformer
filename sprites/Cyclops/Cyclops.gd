@@ -3,27 +3,28 @@ extends KinematicBody2D
 const GRAVITY = 10
 const SPEED = 50
 const FLOOR = Vector2(0,-1)
-
+const ROCK = preload("res://sprites/Cyclops/rock.tscn")
 
 var velocity = Vector2()
 var direction = 1 #we keeping default to right
 var flip_sprite = false
-var attack_power = 30 #power of damage
+var ATTACK_POWER = 50 #power of damage
 var hit_count = 0 # the number of times damage is done
+var rockCount = 0 # number of rocks to generate
 var hp = 300
 
 
 var is_dead = false
 signal _direction_changed()
 
-enum {BASIC, ROCK, LASER}
+enum {BASIC, ROCK_THROW, LASER}
 enum {IDLE, WALK, ATTACK, DEAD} # see enum in godot
-var current_state = IDLE
+export var current_state = IDLE
 var attack_type = BASIC
 func _ready():
 	self.set_meta("character","Cyclops")
 	$HealthBar.creat_healthBar(hp)
-	_change_state(WALK)
+	_change_state(current_state)
 	#_change_state(ATTACK) # this is the skeleton state
 	pass
 
@@ -39,6 +40,7 @@ func _physics_process(delta):
 	var body = $Area2D.get_overlapping_bodies()
 	if Input.is_action_just_pressed("ui_select"):
 		_change_state(ATTACK)
+		attack_type = ROCK_THROW
 		pass
 	match current_state:
 		IDLE:
@@ -79,9 +81,32 @@ func _physics_process(delta):
 					if $AnimatedSprite.frame == 4:
 						for b in body:
 							if b.has_method("damage") and hit_count==0:
-								b.damage(attack_power)
+								b.damage(ATTACK_POWER)
 								hit_count+=1 # a hit with this attack
-				ROCK:
+				ROCK_THROW:
+					$AnimatedSprite.play("attack_rock")
+					if $AnimatedSprite.frame == 11 and rockCount==0:
+						rockCount+=1
+						var rock = ROCK.instance() # creating instance, created one fireball in memory
+						# add position2d to player
+						if $RayCast2D_RockThrow.is_colliding() == true:
+							var t=1
+							var g=147.0 #gravity in pixels / sec
+							var h=30.0 #hight in pixels
+							print($RayCast2D_RockThrow.get_collider().name)
+							#distance in pixels
+							var distance = self.global_position.distance_to($RayCast2D_RockThrow.get_collision_point())
+							var Vx = distance / (t)
+							t *= 0.5
+							var Vy = (h/t) + ((g*t)/2.0)
+							Vy *= 0.5 # this works dont know why
+							Vy *= -1 #change sign
+							print(Vector2(Vx,Vy))
+							rock.velocity = Vector2(Vx,Vy)
+						# adding to stage one scene. not player
+						get_parent().add_child(rock)
+						rock.position = $Position2D.global_position
+						pass
 					pass
 				LASER:
 					pass
@@ -107,7 +132,9 @@ func _on_AnimatedSprite_animation_finished():
 		else:
 			_change_state(IDLE)
 		hit_count=0 # start with zero
+		rockCount=0
 	elif current_state==IDLE:
-		_change_state(WALK)
+		#_change_state(WALK)
+		pass
 	elif current_state == DEAD:
 		queue_free()
