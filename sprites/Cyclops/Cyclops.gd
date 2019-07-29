@@ -19,12 +19,12 @@ signal _direction_changed()
 
 enum {BASIC, ROCK_THROW, LASER}
 enum {IDLE, WALK, ATTACK, DEAD} # see enum in godot
-export var current_state = IDLE
+var current_state = IDLE
 var attack_type = BASIC
 func _ready():
 	self.set_meta("character","Cyclops")
 	$HealthBar.creat_healthBar(hp)
-	_change_state(current_state)
+	_change_state(IDLE)
 	#_change_state(ATTACK) # this is the skeleton state
 	pass
 
@@ -62,6 +62,7 @@ func _physics_process(delta):
 			if is_on_wall() and $Timer.is_stopped():
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
+				$RayCast2D_RockThrow.cast_to.x *= -1
 				$Area2D.position.x *= -1 
 				$CollisionShape2D.position.x *= -1
 				$Timer.start()
@@ -70,6 +71,7 @@ func _physics_process(delta):
 			if $RayCast2D.is_colliding() == false:
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
+				$RayCast2D_RockThrow.cast_to.x *= -1
 				$Area2D.position.x *= -1
 				$CollisionShape2D.position.x *= -1
 				emit_signal("_direction_changed")
@@ -101,6 +103,7 @@ func _physics_process(delta):
 							var Vy = (h/t) + ((g*t)/2.0)
 							Vy *= 0.5 # this works dont know why
 							Vy *= -1 #change sign
+							Vx *= direction
 							print(Vector2(Vx,Vy))
 							rock.velocity = Vector2(Vx,Vy)
 						# adding to stage one scene. not player
@@ -134,7 +137,7 @@ func _on_AnimatedSprite_animation_finished():
 		hit_count=0 # start with zero
 		rockCount=0
 	elif current_state==IDLE:
-		#_change_state(WALK)
+		_change_state(WALK)
 		pass
 	elif current_state == DEAD:
 		queue_free()
